@@ -1,0 +1,54 @@
+/bluerov2/body_control_pid:
+  ros__parameters:
+    control_frame: bluerov2/base_link
+    control_period_ms: 200
+    pitch:
+      Kd: 0.0
+      Ki: 0.01
+      Kp: 0.05
+      Kv: 0.0
+      u_sat: 8.402438661782842
+      use_position: true
+      v_sat: .inf
+    roll:
+      Kd: 0.0
+      Ki: 0.01
+      Kp: 0.05
+      Kv: 0.0
+      u_sat: 17.042438661743024
+      use_position: true
+      v_sat: .inf
+    use_feedforward: false
+    use_sim_time: false
+    x:
+      Kd: 0.0
+      Ki: 0.05
+      Kp: 0.07
+      Kv: 0.1
+      u_sat: 113.13708499054457
+      use_position: true
+      v_sat: .inf
+    y:
+      Kd: 0.0
+      Ki: 0.05
+      Kp: 0.07
+      Kv: 0.1
+      u_sat: 113.13708498955891
+      use_position: true
+      v_sat: .inf
+    yaw:
+      Kd: 0.01
+      Ki: 0.01
+      Kp: 0.05
+      Kv: 0.01
+      u_sat: 27.322606025077864
+      use_position: true
+      v_sat: .inf
+    z:
+      Kd: 0.01
+      Ki: 0.1
+      Kp: 0.1
+      Kv: 0.1
+      u_sat: 80.00000000000001
+      use_position: true
+      v_sat: .inf

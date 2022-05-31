@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) 2020 The Plankton Authors.
+     All rights reserved.
+
+     This source code is derived from UUV Simulator
+     (https://github.com/uuvsimulator/uuv_simulator)
+     Copyright (c) 2016-2019 The UUV Simulator Authors
+     licensed under the Apache license, Version 2.0
+     cf. 3rd-party-licenses.txt file in the root directory of this source tree.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="default_pressure_macro" params="parent_link sensor_name *origin">
+    <xacro:pressure_plugin_macro
+      
+      pressure_link="${sensor_name}"
+      parent_link="${parent_link}"
+      topic="${sensor_name}"
+      mass="0.015"
+      update_rate="10"
+      range="30000"
+      noise_sigma="3.0"
+      noise_amplitude="0.0"
+      estimateDepth="false"
+      standardPressure="101.325"
+      kPaPerM="9.80638">
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
+      <xacro:insert_block name="origin" />>
+    </xacro:pressure_plugin_macro>
+  </xacro:macro>
+
+  <xacro:macro name="default_pressure" params="parent_link sensor_name *origin">
+    <xacro:pressure_plugin_macro     
+      pressure_link="${sensor_name}"
+      parent_link="${parent_link}"
+      topic="${sensor_name}"
+      mass="0.015"
+      update_rate="10"
+      range="30000"
+      noise_sigma="3.0"
+      noise_amplitude="0.0"
+      estimateDepth="false"
+      standardPressure="101.325"
+      kPaPerM="9.80638">
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
+      <xacro:insert_block name="origin" />
+    </xacro:pressure_plugin_macro>
+  </xacro:macro>
+
+  <xacro:macro name="pressure_plugin_macro"
+    params="pressure_link parent_link topic mass update_rate
+      range noise_sigma noise_amplitude estimateDepth standardPressure kPaPerM
+      *inertia *origin">
+      
+    <xacro:add_fixed_link parent_link="${parent_link}" link_name="${pressure_link}">
+        <xacro:insert_block name="origin" />
+    </xacro:add_fixed_link>
+    
+    <gazebo reference="${pressure_link}">
+        <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+      
+
+<!--    <link name="${ns}/pressure${suffix}_link">
+      <inertial>
+        <xacro:insert_block name="inertia" />
+        <mass value="${mass}" />  
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="file://$(find uuv_sensor_ros_plugins)/meshes/pressure.dae" scale="1 1 1"/>
+        </geometry>
+      </visual>
+      <xacro:no_collision/>
+    </link>-->
+
+<!--    <joint name="${ns}/pressure${suffix}_joint" type="revolute">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent_link}" />
+      <child link="${ns}/pressure${suffix}_link" />
+      <limit upper="0" lower="0" effort="0" velocity="0" />
+      <axis xyz="1 0 0"/>
+    </joint>-->
+
+    <gazebo>
+      <plugin filename="libuuv_gazebo_ros_subsea_pressure_plugin.so" name="libuuv_gazebo_subseapressure${pressure_link}_plugin">
+        <ros>
+          <namespace>${ns}</namespace> <!-- (string, required): ros namespace in which the messages are published -->
+        </ros>
+        <!-- <robot_namespace>${ns}</robot_namespace> -->
+        <link_name>${ns}/${pressure_link}</link_name> <!-- (string, required): name of the body which holds the IMU sensor -->
+        <sensor_topic>${topic}</sensor_topic> <!-- (string): name of the sensor output topic and prefix of service names (defaults to imu) -->
+        <update_rate>${update_rate}</update_rate> <!-- Update period of accelerometer and gyroscope [s] -->
+
+        <saturation>${range}</saturation> <!-- measurement range [kPa] -->
+        <noise_sigma>${noise_sigma}</noise_sigma> <!-- measurement stddev [kPa] -->
+        <noise_amplitude>${noise_amplitude}</noise_amplitude>
+        <estimate_depth_on>${estimateDepth}</estimate_depth_on> <!-- infer depth? -->
+        <standard_pressure>${standardPressure}</standard_pressure> <!-- pressure at sea level (depth 0 m) [kPa] -->
+        <kPa_per_meter>${kPaPerM}</kPa_per_meter> <!-- increase in pressure [kPa] per [m] in increased depth -->
+        <enable_gazebo_messages>false</enable_gazebo_messages>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

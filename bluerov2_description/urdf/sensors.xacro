@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:property name="x_camera" value="0.02"/>
+<xacro:property name="PI" value="3.1415927"/>
+
+
+<xacro:macro name="imu" params="name *origin">
+    <link name="${ns}/${name}">
+        <inertial>                
+            <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
+            <mass value="0.015" /> 
+        </inertial>
+      
+      <xacro:if value="${simulation}">
+        <sensor name="imu_sensor" type="imu">
+            <always_on>1</always_on>
+            <update_rate>1</update_rate>
+            <visualize>true</visualize>
+            <topic>mpu</topic>
+        </sensor>
+        </xacro:if>
+            
+    </link>
+ 
+     <joint name="${name}" type="fixed">
+        <xacro:insert_block name="origin"/>
+        <parent link="${ns}/base_link"/>
+        <child link="${ns}/${link_name}"/>
+    </joint>    
+</xacro:macro>
+
+
+<xacro:imu name="mpu">
+    <origin xyz="0 0 0" rpy="${PI} 0 0"/>
+</xacro:imu>
+
+
+
+
+  <!-- IMU Sensor -->
+ <xacro:default_imu parent_link="${ns}/base_link" imu_name="mpu">
+    <origin xyz="0 0 0" rpy="${PI} 0 0"/>
+  </xacro:default_imu>
+  
+  <!-- Pressure Sensor  -->
+  <xacro:default_pressure parent_link="${ns}/base_link" sensor_name="baro">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:default_pressure>
+  
+  
+ <!-- <link name="${ns}/camera">
+    <visual>
+    <geometry>
+        <cylinder radius="0.01" length="0.03"/>
+    </geometry> 
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+    </visual>
+    <inertial>
+    <mass value="0.015"/>
+    <inertia
+    ixx="0.001"
+    ixy="0.0"
+    ixz="0.0"
+    iyy="0.001"
+    iyz="0"
+    izz="0.001"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder length="${0.000001}" radius="${0.000001}" />
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 ${0.5*pi} 0"/>
+    </collision>
+ </link> 
+
+<joint name="tilt" type="revolute">
+    <parent link="${ns}/base_link"/>
+    <child link="${ns}/camera"/>
+    <origin xyz="${x_camera + .15} 0 0" rpy="0 ${PI/2} 0"/>   
+    <axis xyz="0 1 0" />
+    <limit effort="100" velocity="5.0" lower="${-PI/4}" upper="${PI/4}"/>
+    <dynamics damping="0.8"/>
+</joint>-->
+
+
+<!--    <gazebo reference="${ns}/camera">
+        <material>Gazebo/Black</material>
+    <sensor name="camera" type="camera">
+      <update_rate>20</update_rate>
+      <camera name="camera">
+        <horizontal_fov>1.5125</horizontal_fov>
+        <image>
+          <width>768</width>
+          <height>492</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.2</near>
+          <far>200</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.02</stddev>
+        </noise>
+      </camera>
+      <plugin filename="libgazebo_ros_camera.so" name="camera_controller">
+        <updateRate>20</updateRate> 
+        <camera_name>${ns}/camera</camera_name>
+        <frame_name>${ns}/camera</frame_name>
+        <attenuationR>0.0</attenuationR>
+        <attenuationG>0.0</attenuationG>
+        <attenuationB>0.0</attenuationB>
+        <backgroundR>0</backgroundR>
+        <backgroundG>0</backgroundG>
+        <backgroundB>0</backgroundB>
+
+      </plugin>
+    </sensor>
+  </gazebo>-->
+
+
+
+</robot>

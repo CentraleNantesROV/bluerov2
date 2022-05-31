@@ -1,0 +1,8 @@
+/bluerov2/joint_setpoint:
+    type: sensor_msgs/JointState
+    name: [tilt]
+    tilt: 
+        min: -pi/2
+        max: pi/2
+        default: 0
+        to: position[0]

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+<gazebo>
+    <plugin
+filename="libignition-gazebo-hydrodynamics-system.so"
+name="ignition::gazebo::systems::Hydrodynamics">
+        
+    <!-- Ignition notations from Handbook of Marine Craft, Fossen, 2011 -->
+        
+    <link_name>${ns}/base_link</link_name>
+    
+<!-- Thetys -->
+        <xDotU>-4.876161</xDotU>
+        <yDotV>-126.324739</yDotV>
+        <zDotW>-126.324739</zDotW>
+        <kDotP>0</kDotP>
+        <mDotQ>-33.46</mDotQ>
+        <nDotR>-33.46</nDotR>
+        <xUU>-6.2282</xUU>
+        <xU>0</xU>
+        <yVV>-601.27</yVV>
+        <yV>0</yV>
+        <zWW>-601.27</zWW>
+        <zW>0</zW>
+        <kPP>-0.1916</kPP>
+        <kP>0</kP>
+        <mQQ>-632.698957</mQQ>
+        <mQ>0</mQ>
+        <nRR>-632.698957</nRR>
+        <nR>0</nR>
+        
+    <!-- BlueROV2 heavy values from "6-DoF Modelling and Control of a Remotely Operated Vehicle"
+        Wu, Master thesis, Flinder University, 2018  -->
+    <!-- Negative diagonal values of added mass matrix [Fossen (6.38)] -->
+<!--    <xDotU>5.5</xDotU>
+    <yDotV>12.7</yDotV>
+    <zDotW>14.57</zDotW>
+    <kDotP>0.12</kDotP>
+    <mDotQ>0.12</mDotQ>
+    <nDotR>0.12</nDotR>-->
+    
+    <!-- BlueROV2 values from "Numerical Modelling and Experimental Testing of the Hydrodynamic Characteristics 
+        for an Open-Frame Remotely Operated Vehicle",  Li et al, Marine Science and Engineering, 2020         -->    
+    
+    <!-- Negative linear damping [Fossen (6.62)] -->    
+<!--    <xU>1.31</xU>    
+    <yV>9.14</yV>
+    <zW>2.015</zW>
+    <kP>0.</kP>
+    <mQ>0.</mQ>
+    <nR>0.</nR>-->
+                   
+    <!-- Negative quadratic damping [Fossen (6.62)] -->          
+<!--    <xUU>38.169</xUU>    
+    <yVV>129.66</yVV>
+    <zWW>243.25</zWW>
+    <kPP>4.86</kPP>
+    <mQQ>4.86</mQQ>
+    <nRR>4.86</nRR>-->
+    </plugin>
+</gazebo>
+</robot>

@@ -1,0 +1,38 @@
+cmd_thruster_1:
+    type: std_msgs/Float64
+    thrust:
+        min: -40
+        max: 40
+        to: data
+cmd_thruster_2:
+    type: std_msgs/Float64
+    thrust:
+        min: -40
+        max: 40
+        to: data
+cmd_thruster_3:
+    type: std_msgs/Float64
+    thrust:
+        min: -40
+        max: 40
+        to: data
+cmd_thruster_4:
+    type: std_msgs/Float64
+    thrust:
+        min: -40
+        max: 40
+        to: data
+cmd_thruster_5:
+    type: std_msgs/Float64
+    thrust:
+        min: -40
+        max: 40
+        to: data
+#cmd_thruster_6:
+/model/tethys/joint/propeller_joint/cmd_thrust:
+    type: std_msgs/Float64
+    thrust:
+        min: -40
+        max: 40
+        to: data
+        
