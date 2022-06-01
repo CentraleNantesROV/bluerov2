@@ -1,4 +1,4 @@
-from simple_launch import SimpleLauncher, IgnitionBridge
+from simple_launch import SimpleLauncher
 from launch.substitutions import Command
 
 def generate_launch_description():

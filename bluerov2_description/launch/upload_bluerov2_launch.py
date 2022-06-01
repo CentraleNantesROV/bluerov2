@@ -1,4 +1,4 @@
-from simple_launch import SimpleLauncher, IgnitionBridge
+from simple_launch import SimpleLauncher, GazeboBridge
 
 def generate_launch_description():
     
@@ -24,24 +24,24 @@ def generate_launch_description():
                
     with sl.group(ns=namespace):
                     
-        # URDF spawner to ignition, defaults to relative robot_description topic
-        sl.spawn_ign_model(namespace, spawn_args = sl.gazebo_axes_args())
+        # URDF spawner to Gazebo, defaults to relative robot_description topic
+        sl.spawn_gz_model(namespace, spawn_args = sl.gazebo_axes_args())
             
-        # spawn ign / ros bridge anyway        
+        # spawn gz / ros bridge anyway        
         bridges = []
-        ign_js_topic = sl.name_join(IgnitionBridge.model_prefix(namespace),'/joint_state')
-        bridges.append(IgnitionBridge(ign_js_topic, 'joint_states', 'sensor_msgs/JointState', IgnitionBridge.ign2ros))
+        gz_js_topic = sl.name_join(GazeboBridge.model_prefix(namespace),'/joint_state')
+        bridges.append(GazeboBridge(gz_js_topic, 'joint_states', 'sensor_msgs/JointState', GazeboBridge.gz2ros))
         
-        bridges.append(IgnitionBridge(sl.name_join('/model/', namespace, '/pose'),
-                                     'pose_gt', 'geometry_msgs/Pose', IgnitionBridge.ign2ros))
+        bridges.append(GazeboBridge(sl.name_join('/model/', namespace, '/pose'),
+                                     'pose_gt', 'geometry_msgs/Pose', GazeboBridge.gz2ros))
         
         # thrusters
         for thr in range(1, 7):
-            thruster = f'thruster_{thr}'
-            ign_thr_topic = sl.name_join('/model/', namespace, f'/joint/{thruster}/cmd_pos')
-            bridges.append(IgnitionBridge(ign_thr_topic, f'cmd_thruster_{thr}', 'std_msgs/Float64', IgnitionBridge.ros2ign))        
+            thruster = f'thruster{thr}'
+            gz_thr_topic = sl.name_join('/model/', namespace, f'/joint/{thruster}/cmd_thrust')
+            bridges.append(GazeboBridge(gz_thr_topic, f'cmd_{thruster}', 'std_msgs/Float64', GazeboBridge.ros2gz))        
         
-        sl.create_ign_bridge(bridges, 'ign_bridge')
+        sl.create_gz_bridge(bridges)
                         
         # ground truth to tf if requested
         with sl.group(if_arg='ground_truth'):
