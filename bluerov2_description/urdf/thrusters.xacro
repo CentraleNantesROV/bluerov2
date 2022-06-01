@@ -56,7 +56,7 @@
     <xacro:if value="$(arg simulation)">
     <gazebo>   
         <plugin
-            filename="libignition-gazebo-thruster-system.so"
+            filename="ignition-gazebo-thruster-system"
             name="ignition::gazebo::systems::Thruster">
             <namespace>${ns}</namespace>
             <joint_name>thruster${thruster_id}</joint_name>

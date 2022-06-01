@@ -5,11 +5,11 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /Status1
         - /RobotModel1
         - /Pose1
+        - /Grid1
       Splitter Ratio: 0.5
-    Tree Height: 782
+    Tree Height: 746
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -49,36 +49,39 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        bluerov2/thruster_1:
+        bluerov2/thruster1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        bluerov2/thruster_2:
+        bluerov2/thruster2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        bluerov2/thruster_3:
+        bluerov2/thruster3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        bluerov2/thruster_4:
+        bluerov2/thruster4:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        bluerov2/thruster_5:
+        bluerov2/thruster5:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        bluerov2/thruster_6:
+        bluerov2/thruster6:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
+      Mass Properties:
+        Inertia: false
+        Mass: false
       Name: RobotModel
       TF Prefix: ""
       Update Interval: 0
@@ -99,11 +102,13 @@ Visualization Manager:
       Topic:
         Depth: 5
         Durability Policy: Volatile
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /bluerov2/cmd_pose
       Value: true
-    - Alpha: 1
+    - Accept NaN Values: false
+      Alpha: 1
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
@@ -114,13 +119,15 @@ Visualization Manager:
       Topic:
         Depth: 5
         Durability Policy: Volatile
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /bluerov2/wrench_1
       Torque Arrow Scale: 2
       Torque Color: 204; 204; 51
       Value: true
-    - Alpha: 1
+    - Accept NaN Values: false
+      Alpha: 1
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
@@ -131,13 +138,15 @@ Visualization Manager:
       Topic:
         Depth: 5
         Durability Policy: Volatile
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /bluerov2/wrench_2
       Torque Arrow Scale: 2
       Torque Color: 204; 204; 51
       Value: true
-    - Alpha: 1
+    - Accept NaN Values: false
+      Alpha: 1
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
@@ -148,13 +157,15 @@ Visualization Manager:
       Topic:
         Depth: 5
         Durability Policy: Volatile
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /bluerov2/wrench_3
       Torque Arrow Scale: 2
       Torque Color: 204; 204; 51
       Value: true
-    - Alpha: 1
+    - Accept NaN Values: false
+      Alpha: 1
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
@@ -165,13 +176,15 @@ Visualization Manager:
       Topic:
         Depth: 5
         Durability Policy: Volatile
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /bluerov2/wrench_4
       Torque Arrow Scale: 2
       Torque Color: 204; 204; 51
       Value: true
-    - Alpha: 1
+    - Accept NaN Values: false
+      Alpha: 1
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
@@ -182,13 +195,15 @@ Visualization Manager:
       Topic:
         Depth: 5
         Durability Policy: Volatile
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /bluerov2/wrench_5
       Torque Arrow Scale: 2
       Torque Color: 204; 204; 51
       Value: true
-    - Alpha: 1
+    - Accept NaN Values: false
+      Alpha: 1
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
@@ -199,16 +214,35 @@ Visualization Manager:
       Topic:
         Depth: 5
         Durability Policy: Volatile
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /bluerov2/wrench_6
       Torque Arrow Scale: 2
       Torque Color: 204; 204; 51
       Value: true
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz_default_plugins/Grid
+      Color: 10; 118; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Billboards
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 20
+      Reference Frame: <Fixed Frame>
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: bluerov2/base_link_R
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:
@@ -220,6 +254,9 @@ Visualization Manager:
     - Class: rviz_default_plugins/Measure
       Line color: 128; 128; 0
     - Class: rviz_default_plugins/SetInitialPose
+      Covariance x: 0.25
+      Covariance y: 0.25
+      Covariance yaw: 0.06853891909122467
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -248,33 +285,33 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 3.4407033920288086
+      Distance: 19.74281883239746
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -1.5258796215057373
-        Y: -0.024601850658655167
-        Z: -0.988524317741394
+        X: -1.4328389167785645
+        Y: -0.34324124455451965
+        Z: -1.064770221710205
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5497968196868896
+      Pitch: 0.23479703068733215
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 0.10421571135520935
+      Yaw: 0.4842156767845154
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1053
+  Height: 1025
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000211000003b2fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000007901000003fb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000044000003b2000000fd01000003fb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c000002610000000100000110000003b2fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730100000044000003b2000000d301000003fb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d006501000000000000045000000000000000000000045d000003b200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000002110000038efc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000007901000003fb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000004c0000038e000000fd01000003fb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c0000026100000001000001100000038efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000004c0000038e000000d301000003fb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d006501000000000000045000000000000000000000045d0000038e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Tool Properties:
@@ -282,5 +319,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1920
-  X: 1920
+  X: 0
   Y: 0

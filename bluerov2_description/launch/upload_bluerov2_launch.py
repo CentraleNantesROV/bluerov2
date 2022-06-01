@@ -38,14 +38,14 @@ def generate_launch_description():
         # thrusters
         for thr in range(1, 7):
             thruster = f'thruster_{thr}'
-            ign_thr_topic = sl.name_join('/model/', namespace, f'/joint/{thruster}/cmd_thrust')
+            ign_thr_topic = sl.name_join('/model/', namespace, f'/joint/{thruster}/cmd_pos')
             bridges.append(IgnitionBridge(ign_thr_topic, f'cmd_thruster_{thr}', 'std_msgs/Float64', IgnitionBridge.ros2ign))        
         
         sl.create_ign_bridge(bridges, 'ign_bridge')
                         
         # ground truth to tf if requested
         with sl.group(if_arg='ground_truth'):
-            sl.node('pose_to_tf',parameters={'child_frame': sl.name_join(namespace, '/base_link')})
+            sl.node('pose_to_tf',parameters={'child_frame': sl.name_join(namespace, '/base_link'), 'use_sim_time': sl.sim_time})
             
         with sl.group(if_arg='sliders'):
             sl.node('slider_publisher', arguments=[sl.find('bluerov2_description', 'thrusters.yaml')])
