@@ -7,8 +7,9 @@ It is a ROS 2 fork of the work in development at [Ingeniarius, Lda.](http://inge
 
 ## Requirements
 
-- ROS 2 Foxy or newer with `ign-gazebo` and `ign-bridge`
+- ROS 2 Foxy or newer with `ros_ign_bridge`
 - [simple_launch](https://github.com/oKermorgant/simple_launch), installable through `apt install ros-foxy-simple-launch`
+- [slider_publisher](https://github.com/oKermorgant/slider_publisher), installable through `apt install ros-foxy-slider_publisher`
 
 ## Installation 
 
@@ -25,8 +26,20 @@ ign gazebo graded_buoyancy.sdf
 and then
 
 ```bash
-ros2 launch bluerov2_description upload_bluerov2_launch.py
+ros2 launch bluerov2_description upload_bluerov2_launch.py sliders:=true
 ```
+
+## High-level control
+
+Basic control is available in the [auv_control](https://github.com/CentraleNantesROV/auv_control) package
+
+In this case spanw the robot without manual sliders and run e.g. a cascaded PID controller:
+
+```bash
+ros2 launch bluerov2_description upload_bluerov2_launch.py
+ros2 launch bluerov2_control cascaded_pids_launch.py sliders:=true
+```
+
 
 ## License
 

@@ -40,7 +40,7 @@ class RVizRelay(Node):
         for t in (0,1,2,3,4,5):
             self.cmd_sub.append(self.create_subscription(
                 Float64, 
-                f'cmd_thruster_{t+1}', 
+                f'cmd_thruster{t+1}', 
                 lambda msg,idx=t: self.store_thrust(msg, idx),
                 10))
             

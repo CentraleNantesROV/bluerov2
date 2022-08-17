@@ -10,54 +10,38 @@
         <inertial>                
             <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
             <mass value="0.015" /> 
-        </inertial>
-      
-      <xacro:if value="${simulation}">
-        <sensor name="imu_sensor" type="imu">
-            <always_on>1</always_on>
-            <update_rate>1</update_rate>
-            <visualize>true</visualize>
-            <topic>mpu</topic>
-        </sensor>
-        </xacro:if>
+        </inertial>    
             
     </link>
+    
+    <gazebo reference="${ns}/${name}">
+        <sensor name="imu_sensor" type="imu">
+            <always_on>1</always_on>
+            <update_rate>100</update_rate>
+            <visualize>false</visualize>
+            <topic>${ns}/${name}</topic>
+        </sensor>
+    </gazebo>
  
      <joint name="${name}" type="fixed">
         <xacro:insert_block name="origin"/>
         <parent link="${ns}/base_link"/>
-        <child link="${ns}/${link_name}"/>
+        <child link="${ns}/${name}"/>
     </joint>    
 </xacro:macro>
-
 
 <xacro:imu name="mpu">
     <origin xyz="0 0 0" rpy="${PI} 0 0"/>
 </xacro:imu>
 
-
-
-
-  <!-- IMU Sensor -->
- <xacro:default_imu parent_link="${ns}/base_link" imu_name="mpu">
-    <origin xyz="0 0 0" rpy="${PI} 0 0"/>
-  </xacro:default_imu>
   
   <!-- Pressure Sensor  -->
-  <xacro:default_pressure parent_link="${ns}/base_link" sensor_name="baro">
+<!--  <xacro:default_pressure parent_link="${ns}/base_link" sensor_name="baro">
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </xacro:default_pressure>
+  </xacro:default_pressure>-->
   
   
- <!-- <link name="${ns}/camera">
-    <visual>
-    <geometry>
-        <cylinder radius="0.01" length="0.03"/>
-    </geometry> 
-    <material name="black">
-        <color rgba="0 0 0 1"/>
-    </material>
-    </visual>
+  <link name="${ns}/camera">
     <inertial>
     <mass value="0.015"/>
     <inertia
@@ -68,12 +52,6 @@
     iyz="0"
     izz="0.001"/>
     </inertial>
-    <collision>
-      <geometry>
-        <cylinder length="${0.000001}" radius="${0.000001}" />
-      </geometry>
-      <origin xyz="0 0 0" rpy="0 ${0.5*pi} 0"/>
-    </collision>
  </link> 
 
 <joint name="tilt" type="revolute">
@@ -81,46 +59,43 @@
     <child link="${ns}/camera"/>
     <origin xyz="${x_camera + .15} 0 0" rpy="0 ${PI/2} 0"/>   
     <axis xyz="0 1 0" />
-    <limit effort="100" velocity="5.0" lower="${-PI/4}" upper="${PI/4}"/>
+    <limit effort="100" velocity="5.0" lower="${-PI/3}" upper="${PI/3}"/>
     <dynamics damping="0.8"/>
-</joint>-->
+</joint>
 
+<gazebo>
+    <plugin filename="libignition-gazebo-joint-position-controller-system.so" name="ignition::gazebo::systems::JointPositionController">
+        <joint_name>tilt</joint_name>
+        <p_gain>1.</p_gain>
+        <i_gain>0.2</i_gain>
+        <d_gain>0.1</d_gain>
+        <i_max>10</i_max>
+        <i_min>-10</i_min>
+    </plugin>
+</gazebo>
 
-<!--    <gazebo reference="${ns}/camera">
-        <material>Gazebo/Black</material>
+<xacro:if value="$(arg camera)">
+ <gazebo reference="${ns}/camera">
     <sensor name="camera" type="camera">
-      <update_rate>20</update_rate>
-      <camera name="camera">
-        <horizontal_fov>1.5125</horizontal_fov>
-        <image>
-          <width>768</width>
-          <height>492</height>
-          <format>R8G8B8</format>
-        </image>
-        <clip>
-          <near>0.2</near>
-          <far>200</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.02</stddev>
-        </noise>
-      </camera>
-      <plugin filename="libgazebo_ros_camera.so" name="camera_controller">
-        <updateRate>20</updateRate> 
-        <camera_name>${ns}/camera</camera_name>
-        <frame_name>${ns}/camera</frame_name>
-        <attenuationR>0.0</attenuationR>
-        <attenuationG>0.0</attenuationG>
-        <attenuationB>0.0</attenuationB>
-        <backgroundR>0</backgroundR>
-        <backgroundG>0</backgroundG>
-        <backgroundB>0</backgroundB>
-
-      </plugin>
-    </sensor>
-  </gazebo>-->
+    <camera>
+    <horizontal_fov>1.047</horizontal_fov> -->
+    <image>
+        <width>640</width>
+        <height>400</height>
+    </image>
+    <clip>
+        <near>0.3</near>
+        <far>100</far>
+    </clip>
+    </camera>
+    <always_on>1</always_on>
+    <update_rate>30</update_rate>
+    <visualize>true</visualize>
+    <topic>${ns}/image</topic>
+    <enable_metrics>false</enable_metrics>
+</sensor>
+  </gazebo>
+</xacro:if>
 
 
 

@@ -22,7 +22,7 @@
 
       <visual>
         <geometry>
-          <mesh filename="${prop_mesh_file}" scale="1 1 1" />
+          <mesh filename="${prop_mesh_file}"/>
         </geometry>
       </visual>
       
@@ -53,7 +53,7 @@
     </joint>
 
     <!-- ignition topic is /model/{ns}/joint/{joint_name}/cmd_thrust -->
-    <xacro:if value="$(arg simulation)">
+<!--     <xacro:if value="$(arg simulation)"> -->
     <gazebo>   
         <plugin
             filename="ignition-gazebo-thruster-system"
@@ -61,16 +61,16 @@
             <namespace>${ns}</namespace>
             <joint_name>thruster${thruster_id}</joint_name>
 <!-- Thetys -->
-            <thrust_coefficient>0.004422</thrust_coefficient>
+<!--            <thrust_coefficient>0.004422</thrust_coefficient>
         <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>
+        <propeller_diameter>0.2</propeller_diameter>-->
         
-<!--            <thrust_coefficient>0.0001</thrust_coefficient>
+            <thrust_coefficient>0.004422</thrust_coefficient>
             <fluid_density>${density}</fluid_density>
-            <propeller_diameter>${2*prop_r}</propeller_diameter>-->
+            <propeller_diameter>${2*prop_r}</propeller_diameter>
         </plugin>
     </gazebo> 
-    </xacro:if>
+<!--     </xacro:if> -->
 </xacro:macro>
 
   <!-- all 6 thrusters -->

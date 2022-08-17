@@ -28,11 +28,15 @@ cmd_thruster5:
         min: -40
         max: 40
         to: data
-#cmd_thruster6:
-/model/tethys/joint/propeller_joint/cmd_thrust:
+cmd_thruster6:
     type: std_msgs/Float64
     thrust:
         min: -40
         max: 40
         to: data
-        
+cmd_tilt:
+    type: std_msgs/Float64
+    angle:
+        min: -pi/3
+        max: pi/3
+        to: data
