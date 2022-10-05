@@ -1,4 +1,4 @@
-/**:
+/bluerov2/cascaded_pid:
   ros__parameters:
     control_frame: bluerov2/base_link
     control_period_ms: 100
@@ -23,10 +23,7 @@
       deadzone: 0.0
       max_thrust: 40.0
       min_thrust: -40.0
-      thruster_prefix: ''
-      thrusters: []
-      use_gz_plugin: true
-    use_sim_time: true
+      use_gz_plugin: True
     x:
       Kd: 0.0
       Ki: 0.1

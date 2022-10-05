@@ -6,15 +6,6 @@
   <xacro:property name="prop_r" value="0.038"/>
   <xacro:property name="prop_l" value="0.035"/>
   
-  <xacro:if value="$(arg simulation)">
-    <!-- Gazebo needs thrusters to rotate -->
-    <xacro:property name="thruster_joint_type" value="continuous"/>
-  </xacro:if>
-  
-  <xacro:unless value="$(arg simulation)">
-      <xacro:property name="thruster_joint_type" value="fixed"/>
-  </xacro:unless>
-  
   <!--  Thruster macro: joint + link + plugin -->
   <xacro:macro name="thruster" params="thruster_id *origin">
 
@@ -44,7 +35,7 @@
     </link>
 
     <!-- Joint between thruster link and vehicle base link -->    
-    <joint name="thruster${thruster_id}" type="${thruster_joint_type}">
+    <joint name="thruster${thruster_id}" type="continuous">
       <xacro:insert_block name="origin" />
       <axis xyz="1 0 0" />
       <parent link="${ns}/base_link" />
@@ -52,25 +43,20 @@
       <limits effort="-1" velocity="-1"/>
     </joint>
 
-    <!-- ignition topic is /model/{ns}/joint/{joint_name}/cmd_thrust -->
-<!--     <xacro:if value="$(arg simulation)"> -->
-    <gazebo>   
+    <!-- ignition topic is /model/{ns}/joint/{joint_name}/cmd_pos -->
+<!--    <xacro:if value="$(arg simulation)"> -->
+    <gazebo>
         <plugin
             filename="ignition-gazebo-thruster-system"
             name="ignition::gazebo::systems::Thruster">
             <namespace>${ns}</namespace>
             <joint_name>thruster${thruster_id}</joint_name>
-<!-- Thetys -->
-<!--            <thrust_coefficient>0.004422</thrust_coefficient>
-        <fluid_density>1000</fluid_density>
-        <propeller_diameter>0.2</propeller_diameter>-->
-        
             <thrust_coefficient>0.004422</thrust_coefficient>
             <fluid_density>${density}</fluid_density>
             <propeller_diameter>${2*prop_r}</propeller_diameter>
         </plugin>
     </gazebo> 
-<!--     </xacro:if> -->
+<!--  </xacro:if> -->
 </xacro:macro>
 
   <!-- all 6 thrusters -->

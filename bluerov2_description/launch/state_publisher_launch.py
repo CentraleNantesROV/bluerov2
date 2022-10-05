@@ -8,19 +8,15 @@ def generate_launch_description():
     sl.declare_arg('camera', False)
     sl.declare_arg('rviz', False)
     
-    gazebo = sl.sim_time
-    
     namespace=sl.arg('namespace')
     
     with sl.group(ns=namespace):
 
         # xacro parsing + change moving joints to fixed if no Gazebo here
-        xacro_args = {'namespace': namespace, 'simulation': gazebo, 'camera': sl.arg('camera')}
+        xacro_args = {'namespace': namespace, 'simulation': sl.sim_time, 'camera': sl.arg('camera')}
         sl.robot_state_publisher('bluerov2_description', 'bluerov2.xacro', xacro_args=xacro_args)
         
     with sl.group(if_arg='rviz'):
         sl.node('rviz2', arguments = ['-d', sl.find('bluerov2_description', 'bluerov2.rviz')])
-        
-    
-    
+
     return sl.launch_description()
