@@ -1,11 +1,13 @@
 from simple_launch import SimpleLauncher
 
+
 def generate_launch_description():
     
     sl = SimpleLauncher(use_sim_time = True)
     
     sl.declare_arg('namespace', default_value='bluerov2')
     sl.declare_arg('sliders', default_value=False)
+    sl.declare_arg('rviz', default_value=False)
     
     with sl.group(ns=sl.arg('namespace')):
         
@@ -17,7 +19,10 @@ def generate_launch_description():
                     arguments=[sl.find('auv_control', 'pose_setpoint.yaml')])
             
             sl.node('slider_publisher', 'slider_publisher', name='tilt_control',
-                    arguments=[sl.find('bluerov2_description', 'tilt.yaml')])           
+                    arguments=[sl.find('bluerov2_description', 'tilt.yaml')])
 
+    with sl.group(if_arg='rviz'):
+        sl.include('bluerov2_control','rviz_launch.py',
+                   launch_arguments={'namespace': sl.arg('namespace'), 'use_sim_time': sl.sim_time})
 
     return sl.launch_description()

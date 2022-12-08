@@ -7,9 +7,11 @@ def generate_launch_description():
     
     sl.declare_arg('namespace', default_value='bluerov2')
     
-    sl.node('rviz2', arguments = ['-d', sl.find('bluerov2_description', 'bluerov2.rviz')])
-        
+    sl.node('rviz2', arguments = ['-d', sl.find('bluerov2_control', 'bluerov2.rviz')])
+
     with sl.group(ns=sl.arg('namespace')):
-        sl.node('bluerov2_description', 'rviz_bridge.py')
+        sl.node('thruster_manager', 'publish_wrenches',
+                parameters={'control_frame': 'bluerov2/base_link',
+                            'use_gz_topics': sl.sim_time})
     
     return sl.launch_description()

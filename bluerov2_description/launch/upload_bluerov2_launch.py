@@ -1,7 +1,5 @@
 from simple_launch import SimpleLauncher, GazeboBridge
 
-
-
 sl = SimpleLauncher(use_sim_time = True)
 
 sl.declare_arg('namespace', default_value='bluerov2')
@@ -12,9 +10,10 @@ sl.declare_arg('camera', True)
 # initial pose
 sl.declare_gazebo_axes(x=1., y=0., z=1., roll=0.,pitch=0., yaw=0.)
 
+
 def launch_setup():
     
-    ns=sl.arg('namespace')
+    ns = sl.arg('namespace')
     
     # robot state publisher
     sl.include('bluerov2_description', 'state_publisher_launch.py',
@@ -25,7 +24,7 @@ def launch_setup():
         # URDF spawner to Gazebo, defaults to relative robot_description topic
         sl.spawn_gz_model(ns, spawn_args = sl.gazebo_axes_args())
             
-        # spawn gz / ros bridge anyway        
+        # spawn gz / ros bridge anyway
         bridges = []
         gz_js_topic = GazeboBridge.model_prefix(ns) + '/joint_state'
         bridges.append(GazeboBridge(gz_js_topic, 'joint_states', 'sensor_msgs/JointState', GazeboBridge.gz2ros))

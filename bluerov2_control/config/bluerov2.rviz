@@ -10,11 +10,6 @@ Panels:
         - /TF1
         - /Pose1
         - /Pose1/Topic1
-        - /Wrench1
-        - /Wrench2
-        - /Wrench3
-        - /Wrench4
-        - /Wrench6
       Splitter Ratio: 0.5
     Tree Height: 695
   - Class: rviz_common/Selection
@@ -366,7 +361,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 6.718163013458252
+      Distance: 12.203397750854492
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -381,10 +376,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4497968554496765
+      Pitch: 0.354796826839447
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.5304222106933594
+      Yaw: 5.1154327392578125
     Saved: ~
 Window Geometry:
   Displays:
@@ -402,5 +397,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1920
-  X: 2043
+  X: 1919
   Y: 0
