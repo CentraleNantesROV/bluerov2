@@ -1,0 +1,43 @@
+/bluerov2/pose2ranges:
+  ros__parameters:
+    anchor1:
+      frame: 'anchor1'
+      z: -20.
+    anchor2:
+      frame: 'anchor2'
+      x: 100.
+      y: 0.
+      z: -20.
+    anchor3:
+      frame: 'anchor3'
+      x: 0.
+      y: 100.
+      z: -20.
+    anchor4:
+      frame: 'anchor4'
+      x: -100.
+      y: 0.
+      z: -20.
+    anchor5:
+      frame: 'anchor5'
+      x: 0.
+      y: -100.
+      z: -20.
+    frame: bluerov2/base_link
+    noise_scale: 0.2
+    offset:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    qos_overrides:
+      /parameter_events:
+        publisher:
+          depth: 1000
+          durability: volatile
+          history: keep_last
+          reliability: reliable
+    range_max: 100.0
+    range_min: 2.
+    topic: pose_gt
+    use_sim_time: true
+

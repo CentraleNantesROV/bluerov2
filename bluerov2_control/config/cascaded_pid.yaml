@@ -1,10 +1,11 @@
 /bluerov2/cascaded_pid:
   ros__parameters:
+    align_thr: 1.5
     control_frame: bluerov2/base_link
     control_period_ms: 100
     pitch:
       Kd: 0.0
-      Ki: 0.1
+      Ki: 0.0
       Kp: 1.0
       Kv: 0.5
       u_sat: 8.40243866178284
@@ -26,7 +27,7 @@
           reliability: reliable
     roll:
       Kd: 0.0
-      Ki: 0.1
+      Ki: 0.0
       Kp: 1.0
       Kv: 0.5
       u_sat: 17.042438661743024
@@ -34,17 +35,23 @@
       v_sat: .inf
     saturate_thrust: false
     tam:
-      deadzone: 0.0
+      deadzone: 1.0
       max_thrust: 40.0
       min_thrust: -40.0
       thruster_prefix: ''
-      thrusters: []
+      thrusters:
+      - thruster1
+      - thruster2
+      - thruster3
+      - thruster4
+      - thruster5
+      - thruster6
       use_gz_plugin: true
     use_sim_time: true
     x:
       Kd: 0.0
       Ki: 1.0
-      Kp: 20.0
+      Kp: 40.0
       Kv: 1.0
       u_sat: 113.13708499054457
       use_position: true
@@ -52,22 +59,22 @@
     y:
       Kd: 0.0
       Ki: 1.0
-      Kp: 30.0
+      Kp: 40.0
       Kv: 1.0
       u_sat: 113.13708498955891
       use_position: true
       v_sat: .inf
     yaw:
       Kd: 0.0
-      Ki: 0.0
-      Kp: 30.0
+      Ki: 2.0
+      Kp: 40.0
       Kv: 1.0
       u_sat: 27.322606025077864
       use_position: true
       v_sat: .inf
     z:
       Kd: 0.0
-      Ki: 4.0
+      Ki: 7.0
       Kp: 40.0
       Kv: 1.0
       u_sat: 80.00000000000001
