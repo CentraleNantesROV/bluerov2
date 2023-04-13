@@ -4,23 +4,26 @@
 <xacro:property name="x_camera" value="0.02"/>
 <xacro:property name="PI" value="3.1415927"/>
 
-
 <xacro:macro name="imu" params="name *origin">
     <link name="${ns}/${name}">
         <inertial>                
             <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
             <mass value="0.015" /> 
-        </inertial>    
-            
-    </link>
-    
-    <gazebo reference="${ns}/${name}">
-        <sensor name="imu_sensor" type="imu">
+        </inertial>
+        <sensor name="${name}_imu" type="imu">
             <always_on>1</always_on>
-            <update_rate>100</update_rate>
-            <visualize>false</visualize>
-            <topic>${ns}/${name}</topic>
+            <update_rate>1</update_rate>
+            <visualize>true</visualize>
+            <topic>${name}</topic>
         </sensor>
+    </link>
+    <gazebo reference="${ns}/${name}">
+
+         <plugin
+            filename="libgz-sim-imu-system.so"
+            name="gz::sim::systems::Imu">
+             <link_name>${ns}/${name}</link_name>
+        </plugin>
     </gazebo>
  
      <joint name="${name}" type="fixed">
@@ -31,7 +34,11 @@
 </xacro:macro>
 
 <xacro:imu name="mpu">
-    <origin xyz="0 0 0" rpy="${PI} 0 0"/>
+    <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
+</xacro:imu>
+
+<xacro:imu name="lsm">
+    <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
 </xacro:imu>
 
   
@@ -64,7 +71,7 @@
 </joint>
 
 <gazebo>
-    <plugin filename="libignition-gazebo-joint-position-controller-system.so" name="ignition::gazebo::systems::JointPositionController">
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
         <joint_name>tilt</joint_name>
         <topic>${ns}/tilt_cmd</topic>
         <p_gain>1.</p_gain>

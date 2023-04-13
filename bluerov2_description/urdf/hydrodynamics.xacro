@@ -1,25 +1,32 @@
 <?xml version="1.0"?>
 
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
+<xacro>
+
 <gazebo>
-    <plugin
-filename="libignition-gazebo-hydrodynamics-system.so"
-name="ignition::gazebo::systems::Hydrodynamics">
+    <plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+
+<!--     <density>${density}</density> -->
         
     <!-- Ignition notations from Handbook of Marine Craft, Fossen, 2011 -->
         
     <link_name>${ns}/base_link</link_name>
+
+     <xU>0</xU>
+      <yV>0</yV>
+      <zW>0</zW>
+      <kP>0</kP>
+      <mQ>0</mQ>
+      <nR>0</nR>
         
     <!-- BlueROV2 heavy values from "6-DoF Modelling and Control of a Remotely Operated Vehicle"
         Wu, Master thesis, Flinder University, 2018  -->
     <!-- Negative diagonal values of added mass matrix [Fossen (6.38)] -->
-    <xDotU>-5.5</xDotU>
+<!--    <xDotU>-5.5</xDotU>
     <yDotV>-12.7</yDotV>
     <zDotW>-14.57</zDotW>
     <kDotP>-0.12</kDotP>
     <mDotQ>-0.12</mDotQ>
-    <nDotR>-0.12</nDotR>
+    <nDotR>-0.12</nDotR>-->
     
     
     <!-- From "Numerical Modelling and Experimental Testing of the Hydrodynamic Characteristics 
@@ -32,30 +39,30 @@ name="ignition::gazebo::systems::Hydrodynamics">
     <mQ>-0.</mQ>
     <nR>-0.</nR>-->                   
     <!-- Negative quadratic damping [Fossen (6.62)] -->          
-<!--    <xUU>38.169</xUU>    
-    <yVV>-129.66</yVV>
-    <zWW>-243.25</zWW>
-    <kPP>-4.86</kPP>
-    <mQQ>-4.86</mQQ>
-    <nRR>-4.86</nRR>-->
+      <xUabsU>-33.800000000000004</xUabsU>
+      <yVabsV>-54.26875</yVabsV>
+      <zWabsW>-73.37135</zWabsW>
+      <kPabsP>-4.0</kPabsP>
+      <mQabsQ>-4.0</mQabsQ>
+      <nRabsR>-4.0</nRabsR>
         
     <!-- BlueROV2 values from "Model Predictive Control for the BlueROV2", 
         Emil Már Einarsson, Andris Lipenitis, Master thesis, 2020  -->        
     <!-- Negative linear damping -->    
-    <xU>-25.15</xU>    
+<!--    <xU>-25.15</xU>
     <yV>-7.364</yV>
     <zW>-17.955</zW>
     <kP>-1.888</kP>
     <mQ>-0.761</mQ>
-    <nR>-3.744</nR>
+    <nR>-3.744</nR>-->
                    
     <!-- Negative quadratic damping -->          
-    <xUU>-17.77</xUU>    
+<!--    <xUU>-17.77</xUU>
     <yVV>-125.9</yVV>
     <zWW>-72.36</zWW>
     <kPP>-0.1246</kPP>
     <mQQ>-0.1246</mQQ>
-    <nRR>-0.1857</nRR>
+    <nRR>-0.1857</nRR>-->
     </plugin>
 </gazebo>
-</robot>
+</xacro>

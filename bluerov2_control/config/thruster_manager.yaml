@@ -1,0 +1,12 @@
+/bluerov2/thruster_manager:
+  ros__parameters:
+    control_frame: bluerov2/base_link
+    publish_joint_state: true
+    tam:
+      deadzone: 1.
+      max_thrust: 40.0
+      min_thrust: -40.0
+      thruster_prefix: ''
+      use_gz_plugin: true
+    use_sim_time: true
+

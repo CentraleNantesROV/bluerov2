@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
-        - /TF1
         - /Pose1
         - /Pose1/Topic1
       Splitter Ratio: 0.5
@@ -78,6 +77,10 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        bluerov2/lsm:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         bluerov2/mpu:
           Alpha: 1
           Show Axes: false
@@ -121,66 +124,19 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        bluerov2/base_link:
-          Value: true
-        bluerov2/camera:
-          Value: false
-        bluerov2/mpu:
-          Value: false
-        bluerov2/thruster1:
-          Value: false
-        bluerov2/thruster2:
-          Value: false
-        bluerov2/thruster3:
-          Value: false
-        bluerov2/thruster4:
-          Value: false
-        bluerov2/thruster5:
-          Value: false
-        bluerov2/thruster6:
-          Value: false
-        turbine_1_1/base_link:
-          Value: false
-        turbine_1_1/blades:
-          Value: false
-        turbine_1_1/pole:
-          Value: false
-        world:
-          Value: true
       Marker Scale: 1
       Name: TF
-      Show Arrows: true
+      Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
-        world:
-          bluerov2/base_link:
-            bluerov2/camera:
-              {}
-            bluerov2/mpu:
-              {}
-            bluerov2/thruster1:
-              {}
-            bluerov2/thruster2:
-              {}
-            bluerov2/thruster3:
-              {}
-            bluerov2/thruster4:
-              {}
-            bluerov2/thruster5:
-              {}
-            bluerov2/thruster6:
-              {}
-          turbine_1_1/base_link:
-            turbine_1_1/pole:
-              turbine_1_1/blades:
-                {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.10000000149011612
@@ -192,7 +148,7 @@ Visualization Manager:
       Name: Pose
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
-      Shape: Arrow
+      Shape: Axes
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -206,7 +162,7 @@ Visualization Manager:
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
-      Force Arrow Scale: 2
+      Force Arrow Scale: 1
       Force Color: 204; 51; 51
       History Length: 1
       Name: Wrench
@@ -225,7 +181,7 @@ Visualization Manager:
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
-      Force Arrow Scale: 2
+      Force Arrow Scale: 1
       Force Color: 204; 51; 51
       History Length: 1
       Name: Wrench
@@ -244,7 +200,7 @@ Visualization Manager:
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
-      Force Arrow Scale: 2
+      Force Arrow Scale: 1
       Force Color: 204; 51; 51
       History Length: 1
       Name: Wrench
@@ -263,7 +219,7 @@ Visualization Manager:
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
-      Force Arrow Scale: 2
+      Force Arrow Scale: 1
       Force Color: 204; 51; 51
       History Length: 1
       Name: Wrench
@@ -282,7 +238,7 @@ Visualization Manager:
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
-      Force Arrow Scale: 2
+      Force Arrow Scale: 1
       Force Color: 204; 51; 51
       History Length: 1
       Name: Wrench
@@ -301,7 +257,7 @@ Visualization Manager:
       Arrow Width: 0.5
       Class: rviz_default_plugins/Wrench
       Enabled: true
-      Force Arrow Scale: 2
+      Force Arrow Scale: 1
       Force Color: 204; 51; 51
       History Length: 1
       Name: Wrench
@@ -361,25 +317,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 12.203397750854492
+      Distance: 18.748777389526367
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.4020012617111206
-        Y: 0.1986834555864334
-        Z: -0.7097114324569702
+        X: 3.3138394355773926
+        Y: 1.16630220413208
+        Z: -7.868724822998047
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.354796826839447
+      Pitch: 0.3147970736026764
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.1154327392578125
+      Yaw: 0.002258777618408203
     Saved: ~
 Window Geometry:
   Displays:

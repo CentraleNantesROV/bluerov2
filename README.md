@@ -7,9 +7,9 @@ It is a ROS 2 fork of the work in development at [Ingeniarius, Lda.](http://inge
 
 ## Requirements
 
-- ROS 2 Foxy or newer with `ros_ign_bridge`
-- [simple_launch](https://github.com/oKermorgant/simple_launch), installable through `apt install ros-foxy-simple-launch`
-- [slider_publisher](https://github.com/oKermorgant/slider_publisher), installable through `apt install ros-foxy-slider_publisher`
+- ROS 2 Foxy or newer with `ros_ign_bridge` (`ros_gz_bridge` since `Humble`)
+- [simple_launch](https://github.com/oKermorgant/simple_launch), installable through `apt install ros-${ROS_DISTRO}-simple-launch`
+- [slider_publisher](https://github.com/oKermorgant/slider_publisher), installable through `apt install ros-${ROS_DISTRO}-slider-publisher`
 
 ## Installation 
 

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
+
     
   <xacro:property name="prop_mesh_file" value="file://$(find bluerov2_description)/meshes/bluerov2_propcw.dae"/>  
-  <xacro:property name="prop_r" value="0.038"/>
+  <xacro:property name="prop_r" value="0.05"/>
   <xacro:property name="prop_l" value="0.035"/>
   
   <!--  Thruster macro: joint + link + plugin -->
@@ -17,12 +17,12 @@
         </geometry>
       </visual>
       
-        <collision>
+<!--        <collision>
             <origin rpy="0 ${PI/2} 0"/>
         <geometry>            
             <cylinder length="${prop_l}" radius="${prop_r}"/>
         </geometry>
-      </collision>
+      </collision>-->
 
      <inertial>
      <!-- thruster axis is X -->
@@ -47,13 +47,16 @@
 <!--    <xacro:if value="$(arg simulation)"> -->
     <gazebo>
         <plugin
-            filename="ignition-gazebo-thruster-system"
-            name="ignition::gazebo::systems::Thruster">
+            filename="gz-sim-thruster-system"
+            name="gz::sim::systems::Thruster">
             <namespace>${ns}</namespace>
             <joint_name>thruster${thruster_id}</joint_name>
-            <thrust_coefficient>0.004422</thrust_coefficient>
+            <topic>thruster${thruster_id}/cmd</topic>
+            <thrust_coefficient>0.02</thrust_coefficient>
             <fluid_density>${density}</fluid_density>
             <propeller_diameter>${2*prop_r}</propeller_diameter>
+            <velocity_control>true</velocity_control>
+            <use_angvel_cmd>false</use_angvel_cmd>
         </plugin>
     </gazebo> 
 <!--  </xacro:if> -->

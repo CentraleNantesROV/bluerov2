@@ -4,7 +4,7 @@ sl = SimpleLauncher(use_sim_time = True)
 
 sl.declare_arg('namespace', default_value='bluerov2')
 sl.declare_arg('ground_truth',default_value=True)
-sl.declare_arg('sliders',default_value=True)
+sl.declare_arg('sliders',default_value=False)
 sl.declare_arg('camera', True)
 
 # initial pose
@@ -48,7 +48,7 @@ def launch_setup():
         # thrusters
         for thr in range(1, 7):
             thruster = f'thruster{thr}'
-            gz_thr_topic = f'/model/{ns}/joint/{thruster}/cmd_pos'
+            gz_thr_topic = f'/{ns}/{thruster}/cmd'
             bridges.append(GazeboBridge(gz_thr_topic, f'cmd_{thruster}', 'std_msgs/Float64', GazeboBridge.ros2gz))
         
         sl.create_gz_bridge(bridges)
