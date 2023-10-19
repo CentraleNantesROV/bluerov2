@@ -64,10 +64,18 @@
 <joint name="tilt" type="revolute">
     <parent link="${ns}/base_link"/>
     <child link="${ns}/camera"/>
-    <origin xyz="${x_camera + .15} 0 0" rpy="0 ${PI/2} 0"/>   
+    <origin xyz="${x_camera + .15} 0 0" rpy="0 0 0"/>
     <axis xyz="0 1 0" />
     <limit effort="100" velocity="5.0" lower="${-PI/3}" upper="${PI/3}"/>
     <dynamics damping="0.8"/>
+</joint>
+
+<link name="${ns}/camera_optical"/>
+
+<joint name="camera_optical" type="fixed">
+    <parent link="${ns}/camera"/>
+    <child link="${ns}/camera_optical"/>
+    <origin rpy="${-PI/2} 0 ${-PI/2}"/>
 </joint>
 
 <gazebo>

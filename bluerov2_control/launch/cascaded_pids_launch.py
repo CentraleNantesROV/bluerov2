@@ -24,7 +24,7 @@ def generate_launch_description():
                     arguments=[sl.find('auv_control', 'pose_setpoint.yaml')])
 
             sl.node('slider_publisher', 'slider_publisher', name='tilt_control',
-                    arguments=[sl.find('bluerov2_description', 'tilt.yaml')])
+                    arguments=[sl.find('bluerov2_control', 'tilt.yaml')])
 
     with sl.group(if_arg='rviz'):
         sl.include('bluerov2_control','rviz_launch.py',
