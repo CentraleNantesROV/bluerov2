@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) 2020 The Plankton Authors.
+     All rights reserved.
+
+     This source code is derived from UUV Simulator
+     (https://github.com/uuvsimulator/uuv_simulator)
+     Copyright (c) 2016-2019 The UUV Simulator Authors
+     licensed under the Apache license, Version 2.0
+     cf. 3rd-party-licenses.txt file in the root directory of this source tree.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Macro for a minimal collision block (for when you do not want collision block but gazebo needs one) -->
+  <xacro:macro name="no_collision">
+    <collision>
+      <geometry>
+        <cylinder length="${0.000001}" radius="${0.000001}" />
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 ${0.5*pi} 0"/>
+    </collision>
+  </xacro:macro>
+
+  <xacro:macro name="default_camera" params="parent_link cam_link *origin">
+    <xacro:regular_camera_plugin_macro
+     
+      cam_link="${cam_link}"
+      parent_link="${parent_link}"
+      topic="camera"
+      mass="0.1"
+      update_rate="30"
+      hfov="1.5125"
+      width="768"
+      height="492"
+      stddev="0.02"
+      scale="1.0">
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
+      <xacro:insert_block name="origin" />
+    </xacro:regular_camera_plugin_macro>
+  </xacro:macro>
+
+  <xacro:macro name="wideangle_camera" params="parent_link cam_link *origin">
+    <xacro:regular_camera_plugin_macro
+     
+      cam_link="${cam_link}"
+      parent_link="${parent_link}"
+      topic="camera"
+      mass="0.015"
+      update_rate="30"
+      hfov="1.8125"
+      width="768"
+      height="492"
+      stddev="0.02"
+      scale="1.0">
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
+      <xacro:insert_block name="origin" />>
+    </xacro:regular_camera_plugin_macro>
+  </xacro:macro>
+
+  <xacro:macro name="regular_camera_plugin_macro"
+    params="cam_link parent_link topic mass update_rate
+      hfov width height stddev scale
+      *inertia *origin">
+    <!-- Sensor link -->
+    <link name="${ns}/${cam_link}">
+      <inertial>
+        <xacro:insert_block name="inertia" />
+        <mass value="${mass}" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="file://$(find uuv_sensor_ros_plugins)/meshes/oe14-372.dae" scale="${scale} ${scale} ${scale}"/>
+        </geometry>
+      </visual>
+      <xacro:no_collision/>
+    </link>
+
+    <joint name="${ns}/camera${cam_link}_joint" type="revolute">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent_link}" />
+      <child link="${ns}/${cam_link}" />
+      <limit upper="0" lower="0" effort="0" velocity="0" />
+      <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="${ns}/${cam_link}_optical">
+      <xacro:box_inertial x="0.0001" y="0.0001" z="0.0001" mass="0.001">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:box_inertial>
+      <collision>
+        <!-- todo: gazebo needs a collision volume or it will ignore the pose of
+           the joint that leads to this link (and assume it to be the identity) -->
+        <geometry>
+          <cylinder length="0.000001" radius="0.000001"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 ${0.5*pi} 0"/>
+      </collision>
+    </link>
+
+    <joint name="${ns}/camera${cam_link}_optical_joint" type="revolute">
+      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+      <parent link="${ns}/${cam_link}"/>
+      <child link="${ns}/${cam_link}_optical"/>
+      <limit upper="0" lower="0" effort="0" velocity="0" />
+      <axis xyz="1 0 0"/>
+    </joint>
+
+    <gazebo reference="${ns}/${cam_link}">
+      <sensor type="camera" name="camera${cam_link}">
+        <update_rate>${update_rate}</update_rate>
+        <camera name="camera${cam_link}">
+          <horizontal_fov>${hfov}</horizontal_fov>
+          <image>
+            <width>${width}</width>
+            <height>${height}</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>3000</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>${stddev}</stddev>
+          </noise>
+        </camera>
+        <plugin name="camera${cam_link}_controller" filename="libgazebo_ros_camera.so">
+          <!-- <updateRate>${update_rate}</updateRate> -->
+          <camera_name>${ns}/camera${cam_link}</camera_name>
+          <!-- <cameraName>${ns}/camera${cam_link}</cameraName> -->
+          <frame_name>${cam_link}_optical</frame_name>
+          <!-- <frameName>${cam_link}_optical</frameName> -->
+
+          <attenuationR>0.0</attenuationR>
+          <attenuationG>0.0</attenuationG>
+          <attenuationB>0.0</attenuationB>
+
+          <backgroundR>0</backgroundR>
+          <backgroundG>0</backgroundG>
+          <backgroundB>0</backgroundB>
+
+          <ros>
+            <!-- Use either <argument> with - -ros-args -r or remapping -->
+            <remapping>image_raw:=${topic}_image</remapping>
+          </ros>
+
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="underwater_camera_plugin_macro"
+    params="cam_link parent_link topic mass update_rate
+      hfov width height stddev
+      *inertia *origin">
+    <!-- Sensor link -->
+    <link name="${ns}/${cam_link}">
+      <inertial>
+        <xacro:insert_block name="inertia" />
+        <mass value="${mass}" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+      </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="file://$(find uuv_sensor_ros_plugins)/meshes/oe14-372.dae" scale="1 1 1"/>
+        </geometry>
+      </visual>
+      <xacro:no_collision/>
+    </link>
+
+    <joint name="${ns}/camera${cam_link}_joint" type="revolute">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent_link}" />
+      <child link="${ns}/${cam_link}" />
+      <axis xyz="1 0 0"/>
+      <limit upper="0" lower="0" effort="0" velocity="0" />
+    </joint>
+
+    <link name="${ns}/${cam_link}_optical">
+      <xacro:box_inertial x="0.0001" y="0.0001" z="0.0001" mass="0.001">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:box_inertial>
+      <collision>
+        <!-- todo: gazebo needs a collision volume or it will ignore the pose of
+           the joint that leads to this link (and assume it to be the identity) -->
+        <geometry>
+          <cylinder length="0.000001" radius="0.000001"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 ${0.5*pi} 0"/>
+      </collision>
+    </link>
+
+    <joint name="${ns}/${cam_link}" type="revolute">
+      <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+      <parent link="${ns}/${cam_link}"/>
+      <child link="${ns}/${cam_link}_optical"/>
+      <limit upper="0" lower="0" effort="0" velocity="0" />
+      <axis xyz="1 0 0"/>
+    </joint>
+
+    <gazebo reference="${ns}/${cam_link}">
+      <sensor type="depth" name="camera${cam_link}">
+        <update_rate>${update_rate}</update_rate>
+        <camera name="camera${cam_link}">
+          <horizontal_fov>${hfov}</horizontal_fov>
+          <image>
+            <width>${width}</width>
+            <height>${height}</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>3000</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>${stddev}</stddev>
+          </noise>
+        </camera>
+        <!-- TODO Check parameters for ROS 2 syntax-->
+        <plugin name="camera${cam_link}_controller" filename="libuuv_gazebo_ros_camera_plugin.so">
+          <updateRate>${update_rate}</updateRate>
+          <cameraName>${ns}/camera${cam_link}</cameraName>
+          <frameName>${ns}/${cam_link}</frameName>
+
+          <attenuationR>0.01</attenuationR>
+          <attenuationG>0.01</attenuationG>
+          <attenuationB>0.003</attenuationB>
+
+          <backgroundR>0</backgroundR>
+          <backgroundG>0</backgroundG>
+          <backgroundB>0</backgroundB>
+
+          <!-- required for ros depth cam -->
+          <imageTopicName>${topic}_image</imageTopicName>
+          <pointCloudTopicName>${topic}_cloud</pointCloudTopicName>
+          <depthImageTopicName>${topic}_depth</depthImageTopicName>
+          <depthImageCameraInfoTopicName>${topic}_depth_info</depthImageCameraInfoTopicName>
+          <pointCloudCutoff>10.0</pointCloudCutoff>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

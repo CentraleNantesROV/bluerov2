@@ -5,10 +5,14 @@ This repository contains the robot description and necessary launch files to des
 
 ## Requirements
 
-- ROS 2 Foxy or newer with `ros_ign_bridge` (`ros_gz_bridge` since `Humble`)
+- ROS 2 Garden or newer with `ros_gz_bridge` (you may have to [recompile it from sources](https://github.com/gazebosim/ros_gz))
 - [simple_launch](https://github.com/oKermorgant/simple_launch), installable through `apt install ros-${ROS_DISTRO}-simple-launch`
 - [slider_publisher](https://github.com/oKermorgant/slider_publisher), installable through `apt install ros-${ROS_DISTRO}-slider-publisher`
 - [pose_to_tf](https://github.com/oKermorgant/pose_to_tf), to get the ground truth from Gazebo.
+
+### Foxy / Ignition
+
+A legacy version using Ignition plugins is available in `bluerov2_ignition`.
 
 ## Installation 
 
