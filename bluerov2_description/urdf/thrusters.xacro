@@ -58,7 +58,7 @@
             <velocity_control>true</velocity_control>
             <use_angvel_cmd>false</use_angvel_cmd>
         </plugin>
-    </gazebo> 
+      </gazebo>
 <!--  </xacro:if> -->
 </xacro:macro>
 

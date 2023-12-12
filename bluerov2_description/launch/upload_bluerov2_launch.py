@@ -24,7 +24,7 @@ def launch_setup():
         # URDF spawner to Gazebo, defaults to relative robot_description topic
         sl.spawn_gz_model(ns, spawn_args = sl.gazebo_axes_args())
             
-        # spawn gz / ros bridge anyway
+        # ROS-Gz bridges
         bridges = []
         gz_js_topic = GazeboBridge.model_prefix(ns) + '/joint_state'
         bridges.append(GazeboBridge(gz_js_topic, 'joint_states', 'sensor_msgs/JointState', GazeboBridge.gz2ros))
@@ -36,6 +36,12 @@ def launch_setup():
         # odometry
         bridges.append(GazeboBridge(f'/model/{ns}/odometry',
                                      'odom', 'nav_msgs/Odometry', GazeboBridge.gz2ros))
+
+        # imu
+        for imu in ('mpu', 'lsm'):
+            bridges.append(GazeboBridge(f'{ns}/{imu}',
+                          imu, 'sensor_msgs/Imu', GazeboBridge.gz2ros))
+
         
         # camera
         if sl.arg('camera'):
