@@ -154,7 +154,6 @@
     </plugin>
 </gazebo>
 
-<xacro:if value="$(arg camera)">
  <gazebo reference="${ns}/camera">
     <sensor name="camera" type="camera">
     <camera>
@@ -174,9 +173,8 @@
     <visualize>true</visualize>
     <topic>${ns}/image</topic>
     <enable_metrics>false</enable_metrics>
-</sensor>
-  </gazebo>
-</xacro:if>
+  </sensor>
+</gazebo>
 
 
 

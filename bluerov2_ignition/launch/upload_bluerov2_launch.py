@@ -17,7 +17,7 @@ def launch_setup():
     
     # robot state publisher
     sl.include('bluerov2_ignition', 'state_publisher_launch.py',
-               launch_arguments={'namespace': ns, 'use_sim_time': sl.sim_time, 'camera': sl.arg('camera')})
+               launch_arguments={'namespace': ns, 'use_sim_time': sl.sim_time})
                
     with sl.group(ns=ns):
                     
@@ -41,7 +41,6 @@ def launch_setup():
         for imu in ('mpu', 'lsm'):
             bridges.append(GazeboBridge(f'{ns}/{imu}',
                           imu, 'sensor_msgs/Imu', GazeboBridge.gz2ros))
-
         
         # camera
         if sl.arg('camera'):

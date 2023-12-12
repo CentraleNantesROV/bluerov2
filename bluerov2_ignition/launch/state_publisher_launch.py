@@ -14,7 +14,7 @@ def generate_launch_description():
     with sl.group(ns=namespace):
 
         # xacro parsing + change moving joints to fixed if no Gazebo here
-        xacro_args = {'namespace': namespace, 'simulation': sl.sim_time, 'camera': sl.arg('camera')}
+        xacro_args = {'namespace': namespace, 'simulation': sl.sim_time}
         sl.robot_state_publisher('bluerov2_ignition', 'bluerov2.xacro', xacro_args=xacro_args)
 
         with sl.group(if_arg='jsp'):
