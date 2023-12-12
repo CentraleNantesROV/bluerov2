@@ -16,13 +16,13 @@ Clone the package in your ROS 2 workspace `src` and compile with `colcon`
 
 ## Running 
 
-To run a demonstration with the vehicle, you can run a Gazebo scenario, such as
+To run a demonstration with the vehicle, you can run a Gazebo scenario, such as an empty world with buoyancy and sensors setup:
 
 ```bash
-gz sim graded_buoyancy.sdf
+ros2 launch bluerov2_description world_launch.py
 ```
 
-and then
+and then spawn the robot with a GUI to control the thrusters:
 
 ```bash
 ros2 launch bluerov2_description upload_bluerov2_launch.py sliders:=true

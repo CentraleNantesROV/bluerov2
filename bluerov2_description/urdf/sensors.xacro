@@ -5,8 +5,9 @@
 <xacro:property name="PI" value="3.1415927"/>
 
 <xacro:macro name="imu" params="name *origin">
-    <link name="${ns}/${name}">
-        <sensor name="${name}_imu" type="imu">
+    <link name="${ns}/${name}"/>
+    <gazebo reference="${ns}/${name}">
+    <sensor name="${name}_imu" type="imu">
             <always_on>1</always_on>
             <update_rate>1</update_rate>
             <visualize>true</visualize>
@@ -89,7 +90,7 @@
         </orientation_reference_frame>
       </imu>
         </sensor>
-    </link>
+      </gazebo>
      <joint name="${name}" type="fixed">
         <xacro:insert_block name="origin"/>
         <parent link="${ns}/base_link"/>
