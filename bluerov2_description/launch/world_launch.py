@@ -11,7 +11,7 @@ def generate_launch_description():
         sl.gz_launch(f"-r {sl.find('bluerov2_description', 'demo_world.sdf')}")
         
     with sl.group(unless_arg='gui'):
-        sl.gz_launch(f"-r {sl.find('bluerov2_description', 'demo_world.sdf')}")
+        sl.gz_launch(f"-s -r {sl.find('bluerov2_description', 'demo_world.sdf')}")
         
     sl.create_gz_clock_bridge()
         
