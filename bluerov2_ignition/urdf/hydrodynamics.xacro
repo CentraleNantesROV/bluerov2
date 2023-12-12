@@ -3,7 +3,7 @@
 <xacro>
 
 <gazebo>
-    <plugin filename="ign-gazebo-hydrodynamics-system" name="ignition::gazebo::systems::Hydrodynamics">
+    <plugin filename="ignition-gazebo-hydrodynamics-system" name="ignition::gazebo::systems::Hydrodynamics">
 
 <!--     <density>${density}</density> -->
         

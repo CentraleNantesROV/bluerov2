@@ -82,10 +82,10 @@
 <!-- other Gazebo plugins -->
 <xacro:if value="$(arg simulation)">
     <gazebo>
-        <plugin filename="ign-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher"/>
+        <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher"/>
         
         <plugin
-            filename="ign-gazebo-odometry-publisher-system"
+            filename="ignition-gazebo-odometry-publisher-system"
             name="ignition::gazebo::systems::OdometryPublisher">
             <odom_frame>${ns}/odom</odom_frame>
             <dimensions>3</dimensions>
@@ -94,7 +94,7 @@
         </plugin>
         
         <plugin
-            filename="ign-gazebo-pose-publisher-system"
+            filename="ignition-gazebo-pose-publisher-system"
             name="ignition::gazebo::systems::PosePublisher">
             <publish_link_pose>false</publish_link_pose>
             <publish_collision_pose>false</publish_collision_pose>

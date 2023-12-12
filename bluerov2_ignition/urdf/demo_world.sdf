@@ -7,28 +7,28 @@
       <real_time_factor>1.0</real_time_factor>
     </physics>
     <plugin
-      filename="ign-gazebo-physics-system"
+      filename="ignition-gazebo-physics-system"
       name="ignition::gazebo::systems::Physics">
     </plugin>
     <plugin
-      filename="ign-gazebo-user-commands-system"
+      filename="ignition-gazebo-user-commands-system"
       name="ignition::gazebo::systems::UserCommands">
     </plugin>
     <plugin
-      filename="ign-gazebo-scene-broadcaster-system"
+      filename="ignition-gazebo-scene-broadcaster-system"
       name="ignition::gazebo::systems::SceneBroadcaster">
     </plugin>
     <plugin
-      filename="ign-gazebo-imu-system"
+      filename="ignition-gazebo-imu-system"
       name="ignition::gazebo::systems::Imu">
     </plugin>
     <plugin
-      filename="ign-gazebo-sensors-system"
+      filename="ignition-gazebo-sensors-system"
       name="ignition::gazebo::systems::Sensors">
       <render_engine>ogre2</render_engine>
     </plugin>
     <plugin
-      filename="ign-gazebo-buoyancy-system"
+      filename="ignition-gazebo-buoyancy-system"
       name="ignition::gazebo::systems::Buoyancy">
       <graded_buoyancy>
         <default_density>1000</default_density>
