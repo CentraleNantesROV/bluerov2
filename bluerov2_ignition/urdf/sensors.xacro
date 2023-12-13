@@ -50,7 +50,7 @@
             </noise>
           </z>
         </angular_velocity>
-        <linear_acceleration>
+        <!--<linear_acceleration>
           <x>
             <noise type="gaussian">
               <mean>0</mean>
@@ -84,7 +84,7 @@
               <precision>0.005</precision>
             </noise>
           </z>
-        </linear_acceleration>
+        </linear_acceleration>-->
         <orientation_reference_frame>
           <localization>ENU</localization>
         </orientation_reference_frame>
