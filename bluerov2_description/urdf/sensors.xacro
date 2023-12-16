@@ -143,6 +143,58 @@
     <origin rpy="${-PI/2} 0 ${-PI/2}"/>
 </joint>
 
+<link name="${ns}/sonar">
+    <visual>
+      <origin xyz="0 0 -0.022" rpy="0 0 ${PI/2}"/>
+      <geometry>
+        <mesh filename="file://$(find bluerov2_description)/meshes/ping360_sonar.dae"
+              scale="0.01 0.01 0.01"/>/>
+      </geometry>
+
+    </visual>
+</link>
+
+<joint name="sonar" type="fixed">
+    <parent link="${ns}/base_link"/>
+    <child link="${ns}/sonar"/>
+    <origin xyz="0.135 0.108 0.118"/>
+</joint>
+
+<gazebo reference="${ns}/sonar">
+  <sensor type="gpu_lidar" name="ping360_sonar">
+    <pose>0 0 0 0 0 0</pose>
+    <update_rate>5</update_rate>
+    <topic>${ns}/sonar</topic>
+    <gz_frame_id>${ns}/sonar</gz_frame_id>
+    <ray>
+      <scan>
+        <horizontal>
+          <samples>360</samples>
+          <resolution>1</resolution>
+          <min_angle>0.0</min_angle>
+          <max_angle>6.28319</max_angle>
+        </horizontal>
+      </scan>
+      <range>
+        <min>0.1</min>
+        <max>20.</max>
+        <resolution>0.015</resolution>
+      </range>
+      <noise>
+        <type>gaussian</type>
+        <mean>0.0</mean>
+        <stddev>0.01</stddev>
+      </noise>
+    </ray>
+  </sensor>
+</gazebo>
+
+
+
+
+
+
+
 <gazebo>
     <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
         <joint_name>tilt</joint_name>
@@ -155,7 +207,7 @@
 </gazebo>
 
  <gazebo reference="${ns}/camera">
-    <sensor name="camera" type="camera">
+  <sensor name="camera" type="camera">
     <camera>
     <optical_frame_id>${ns}/camera_optical</optical_frame_id>
     <horizontal_fov>1.047</horizontal_fov>

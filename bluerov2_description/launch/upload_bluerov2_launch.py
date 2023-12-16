@@ -42,6 +42,9 @@ def launch_setup():
             bridges.append(GazeboBridge(f'{ns}/{imu}',
                           imu, 'sensor_msgs/Imu', GazeboBridge.gz2ros))
 
+        # sonar (as laser scan for now...)
+        bridges.append(GazeboBridge(f'{ns}/sonar', 'sonar', 'sensor_msgs/LaserScan', GazeboBridge.gz2ros))
+
         # camera
         if sl.arg('camera'):
             bridges.append(GazeboBridge(f'{ns}/image', 'image', 'sensor_msgs/Image', GazeboBridge.gz2ros))
