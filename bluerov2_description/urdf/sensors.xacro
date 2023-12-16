@@ -161,10 +161,10 @@
 </joint>
 
 <gazebo reference="${ns}/sonar">
-  <sensor type="gpu_lidar" name="ping360_sonar">
-    <pose>0 0 0 0 0 0</pose>
+  <sensor type="gpu_ray" name="ping360_sonar">
     <update_rate>5</update_rate>
     <topic>${ns}/sonar</topic>
+    <visualize>true</visualize>
     <gz_frame_id>${ns}/sonar</gz_frame_id>
     <ray>
       <scan>
@@ -174,6 +174,12 @@
           <min_angle>0.0</min_angle>
           <max_angle>6.28319</max_angle>
         </horizontal>
+         <vertical>
+            <samples>10</samples>
+            <resolution>1</resolution>
+            <min_angle>-0.1</min_angle>
+            <max_angle>0.1</max_angle>
+          </vertical>
       </scan>
       <range>
         <min>0.1</min>
@@ -188,11 +194,6 @@
     </ray>
   </sensor>
 </gazebo>
-
-
-
-
-
 
 
 <gazebo>

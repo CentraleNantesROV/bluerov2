@@ -44,6 +44,7 @@ def launch_setup():
 
         # sonar (as laser scan for now...)
         bridges.append(GazeboBridge(f'{ns}/sonar', 'sonar', 'sensor_msgs/LaserScan', GazeboBridge.gz2ros))
+        bridges.append(GazeboBridge(f'{ns}/sonar/points', 'cloud', 'sensor_msgs/PointCloud2', GazeboBridge.gz2ros))
 
         # camera
         if sl.arg('camera'):
