@@ -13,7 +13,7 @@ def generate_launch_description():
     
     with sl.group(ns=namespace):
 
-        sl.robot_state_publisher('bluerov2_ignition', 'bluerov2.urdf')
+        sl.robot_state_publisher('bluerov2_ignition', 'bluerov2.xacro')
 
         with sl.group(if_arg='jsp'):
             sl.joint_state_publisher(True)

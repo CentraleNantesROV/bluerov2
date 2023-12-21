@@ -98,13 +98,13 @@
     </joint>
 </xacro:macro>
 
-<xacro:imu name="mpu">
+<!--<xacro:imu name="mpu">
     <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
 </xacro:imu>
 
 <xacro:imu name="lsm">
     <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
-</xacro:imu>
+</xacro:imu>-->
 
   
   <!-- Pressure Sensor  -->
