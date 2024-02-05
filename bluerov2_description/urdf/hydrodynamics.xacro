@@ -3,7 +3,7 @@
 <xacro>
 
 <gazebo>
-    <plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+    <plugin filename="gz-sim-hydrodynamics-system" name="ignition::gazebo::systems::Hydrodynamics">
 
 <!--     <density>${density}</density> -->
         
