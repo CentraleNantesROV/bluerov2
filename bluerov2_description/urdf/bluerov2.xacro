@@ -79,7 +79,7 @@
 <!-- other Gazebo plugins -->
 <xacro:if value="$(arg simulation)">
     <gazebo>
-        <plugin filename="gz-sim-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher"/>
+        <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher"/>
         
         <plugin
             filename="ignition-gazebo-odometry-publisher-system"

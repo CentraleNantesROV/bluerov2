@@ -197,7 +197,7 @@
 
 
 <gazebo>
-    <plugin filename="gz-sim-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
+    <plugin filename="ignition-gazebo-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
         <joint_name>tilt</joint_name>
         <p_gain>10.</p_gain>
         <i_gain>0.2</i_gain>
