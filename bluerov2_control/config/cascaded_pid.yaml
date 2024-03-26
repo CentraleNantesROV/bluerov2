@@ -36,8 +36,8 @@
     saturate_thrust: false
     tam:
       deadzone: 1.0
-      max_thrust: 40.0
-      min_thrust: -40.0
+      max_thrust: 40.
+      min_thrust: -40.
       thruster_prefix: ''
       thrusters:
       - thruster1
