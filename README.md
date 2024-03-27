@@ -5,10 +5,11 @@ This repository contains the robot description and necessary launch files to des
 
 ## Requirements
 
-- ROS 2 Garden or newer with `ros_gz_bridge` (you may have to [recompile it from sources](https://github.com/gazebosim/ros_gz))
+- ROS 2 with Gazebo Fortress or newer with `ros_gz_bridge` (you may have to [recompile it from sources](https://gazebosim.org/docs/garden/ros_installation)). Look out for your ROS 2 / Gazebo versions combination.
+- [Xacro ](https://github.com/ros/xacro/tree/ros2), installable through `apt install ros-${ROS_DISTRO}-xacro`
 - [simple_launch](https://github.com/oKermorgant/simple_launch), installable through `apt install ros-${ROS_DISTRO}-simple-launch`
 - [slider_publisher](https://github.com/oKermorgant/slider_publisher), installable through `apt install ros-${ROS_DISTRO}-slider-publisher`
-- [pose_to_tf](https://github.com/oKermorgant/pose_to_tf), to get the ground truth from Gazebo.
+- [pose_to_tf](https://github.com/oKermorgant/pose_to_tf), to get the ground truth from Gazebo if needed.
 
 
 ## Installation 
