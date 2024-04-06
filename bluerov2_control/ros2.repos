@@ -1,0 +1,5 @@
+repositories:
+  auv_control:
+    type: git
+    url: https://github.com/CentraleNantesROV/auv_control.git
+    version: main

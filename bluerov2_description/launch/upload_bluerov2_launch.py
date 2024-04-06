@@ -6,6 +6,7 @@ sl.declare_arg('namespace', default_value='bluerov2')
 sl.declare_arg('ground_truth',default_value=True)
 sl.declare_arg('sliders',default_value=False)
 sl.declare_arg('camera', True)
+sl.declare_arg('gazebo_world_name', 'none')
 
 # initial pose
 sl.declare_gazebo_axes(x=1., y=0., z=1., roll=0.,pitch=0., yaw=0.)
@@ -14,6 +15,9 @@ sl.declare_gazebo_axes(x=1., y=0., z=1., roll=0.,pitch=0., yaw=0.)
 def launch_setup():
     
     ns = sl.arg('namespace')
+
+    if sl.arg('gazebo_world_name') != 'none':
+        GazeboBridge.set_world_name(sl.arg('gazebo_world_name'))
     
     # robot state publisher
     sl.include('bluerov2_description', 'state_publisher_launch.py',
