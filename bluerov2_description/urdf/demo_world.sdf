@@ -2,6 +2,11 @@
 <sdf version="1.6">
   <world name="ocean">
 
+    <scene>
+      <grid>false</grid>
+    </scene>
+
+
     <physics name="10ms" type="ode">
       <max_step_size>0.01</max_step_size>
       <real_time_factor>1.0</real_time_factor>

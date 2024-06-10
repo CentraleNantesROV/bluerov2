@@ -8,7 +8,7 @@
   <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <run_depend>auv_control</run_depend>
+  <exec_depend>auv_control</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
