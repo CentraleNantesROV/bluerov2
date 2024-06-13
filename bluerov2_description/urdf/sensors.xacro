@@ -217,7 +217,7 @@
         <height>400</height>
     </image>
     <clip>
-        <near>0.3</near>
+        <near>0.4</near>
         <far>100</far>
     </clip>
     </camera>
