@@ -1,4 +1,4 @@
-from simple_launch import SimpleLauncher
+from simple_launch import SimpleLauncher, GazeboBridge
 
 
 def generate_launch_description():
@@ -11,7 +11,11 @@ def generate_launch_description():
         
     with sl.group(unless_arg='gui'):
         sl.gz_launch(sl.find('bluerov2_description', 'demo_world.sdf'), "-r -s")
+
+    bridges = [GazeboBridge.clock(),
+               GazeboBridge('/ocean_current', '/current', 'geometry_msgs/Vector3',
+                            GazeboBridge.ros2gz)]
         
-    sl.create_gz_clock_bridge()
+    sl.create_gz_bridge(bridges)
         
     return sl.launch_description()

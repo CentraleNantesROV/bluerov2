@@ -27,8 +27,8 @@
   <!-- Center of gravity -->
   <xacro:property name="z_cog" value="${-buoyant_correction*z_size}"/>
   
-  <xacro:property name="visual_mesh_file" value="file://$(find bluerov2_description)/meshes/bluerov2_noprop.dae"/>
-  <xacro:property name="collision_mesh_file" value="file://$(find bluerov2_description)/meshes/bluerov2_noprop.stl"/>
+  <xacro:property name="visual_mesh_file" value="package://bluerov2_description/meshes/bluerov2_noprop.dae"/>
+  <xacro:property name="collision_mesh_file" value="package://bluerov2_description/meshes/bluerov2_noprop.stl"/>
 
   <!-- Vehicle base link -->
     <link name="${ns}/base_link">

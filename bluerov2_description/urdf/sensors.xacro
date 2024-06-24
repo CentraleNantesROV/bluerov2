@@ -9,11 +9,10 @@
     <gazebo reference="${ns}/${name}">
     <sensor name="${name}_imu" type="imu">
             <always_on>1</always_on>
-            <update_rate>1</update_rate>
+            <update_rate>10</update_rate>
             <visualize>true</visualize>
             <topic>${ns}/${name}</topic>
             <gz_frame_id>${ns}/${name}</gz_frame_id>
-            <update_rate>100</update_rate>
       <imu>
         <angular_velocity>
           <x>
@@ -147,7 +146,7 @@
     <visual>
       <origin xyz="0 0 -0.022" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find bluerov2_description)/meshes/ping360_sonar.dae"
+        <mesh filename="package://bluerov2_description/meshes/ping360_sonar.dae"
               scale="0.01 0.01 0.01"/>/>
       </geometry>
 

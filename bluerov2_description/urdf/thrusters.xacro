@@ -2,8 +2,8 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     
-  <xacro:property name="prop_mesh_cw" value="file://$(find bluerov2_description)/meshes/bluerov2_propcw.dae"/>
-  <xacro:property name="prop_mesh_ccw" value="file://$(find bluerov2_description)/meshes/bluerov2_propccw.dae"/>
+  <xacro:property name="prop_mesh_cw" value="package://bluerov2_description/meshes/bluerov2_propcw.dae"/>
+  <xacro:property name="prop_mesh_ccw" value="package://bluerov2_description/meshes/bluerov2_propccw.dae"/>
   <xacro:property name="prop_r" value="0.05"/>
   <xacro:property name="prop_l" value="0.035"/>
   
