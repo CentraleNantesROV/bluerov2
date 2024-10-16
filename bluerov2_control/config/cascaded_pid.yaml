@@ -1,6 +1,6 @@
 /bluerov2/cascaded_pid:
   ros__parameters:
-    align_thr: 1.5
+    align_thr: .5
     control_frame: bluerov2/base_link
     control_period_ms: 100
     pitch:
@@ -33,7 +33,6 @@
       u_sat: 17.042438661743024
       use_position: true
       v_sat: .inf
-    saturate_thrust: false
     tam:
       deadzone: 1.0
       max_thrust: 40.

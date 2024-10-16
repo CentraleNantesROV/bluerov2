@@ -1,0 +1,51 @@
+/bluerov2/body_control_sm:
+  ros__parameters:
+    K: 0.5
+    align_thr: 0.
+    alpha:
+      ang: 0.01
+      lin: 0.01
+    control_frame: bluerov2/base_link
+    control_period_ms: 100
+    eps:
+      ang: 0.1
+      lin: 0.1
+    kbar:
+      ang: 1.0
+      lin: 1.0
+    lambda:
+      ang: 10.0
+      lin: 10.0
+    mu:
+      ang: 0.1
+      lin: 0.1
+    publish_joint_state: true
+    qos_overrides:
+      /clock:
+        subscription:
+          depth: 1
+          durability: volatile
+          history: keep_last
+          reliability: best_effort
+      /parameter_events:
+        publisher:
+          depth: 1000
+          durability: volatile
+          history: keep_last
+          reliability: reliable
+    tam:
+      deadzone: 0.0
+      max_thrust: 40.0
+      min_thrust: -40.0
+      thruster_prefix: ''
+      thrusters:
+      - thruster1
+      - thruster2
+      - thruster3
+      - thruster4
+      - thruster5
+      - thruster6
+      use_gz_plugin: true
+    use_hydro: true
+    use_sim_time: true
+
