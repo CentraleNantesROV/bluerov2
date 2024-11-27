@@ -35,8 +35,8 @@
       use_position: true
       v_sat: .inf
     tam:
-      continuity: 1.
-      deadzone: 0.
+      continuity: 100.
+      deadzone: 1.
       max_thrust: 40.
       min_thrust: -40.
       thruster_prefix: ''
@@ -67,8 +67,8 @@
       v_sat: .inf
     yaw:
       Kd: 0.0
-      Ki: 1.0
-      Kp: 75.
+      Ki: .5
+      Kp: 10.
       Kv: 3.
       u_sat: 27.322606025077864
       use_position: true
