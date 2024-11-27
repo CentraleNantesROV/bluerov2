@@ -34,7 +34,7 @@
           history: keep_last
           reliability: reliable
     tam:
-      deadzone: 0.0
+      deadzone: 1.
       max_thrust: 40.0
       min_thrust: -40.0
       thruster_prefix: ''

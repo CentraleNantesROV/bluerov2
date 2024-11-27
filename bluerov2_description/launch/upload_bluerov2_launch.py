@@ -37,9 +37,18 @@ def launch_setup():
         bridges.append(GazeboBridge(f'/model/{ns}/pose',
                                      'pose_gt', 'geometry_msgs/Pose', GazeboBridge.gz2ros))
         
-        # odometry
-        bridges.append(GazeboBridge(f'/model/{ns}/odometry',
-                                     'odom', 'nav_msgs/Odometry', GazeboBridge.gz2ros))
+        # ground truth if requested
+        if sl.arg('ground_truth'):
+            odom_link = ns + '/odom'
+            bridges.append(GazeboBridge(f'/model/{ns}/odometry',
+                                     'odom', 'nav_msgs/Odometry', GazeboBridge.gz2ros,
+                                     'gz.msgs.Odometry'))
+            sl.node('pose_to_tf',parameters={'child_frame': ns + '/base_link'})
+            sl.node('tf2_ros', 'static_transform_publisher',
+                    arguments = f'--frame-id world --child-frame-id {odom_link}')
+        else:
+            # otherwise publish ground truth as another link to get, well, ground truth
+            sl.node('pose_to_tf',parameters={'child_frame': ns+'/base_link_gt'})
 
         # imu
         for imu in ('mpu', 'lsm'):
@@ -63,15 +72,8 @@ def launch_setup():
             thruster = f'thruster{thr}'
             gz_thr_topic = f'/{ns}/{thruster}/cmd'
             bridges.append(GazeboBridge(gz_thr_topic, f'cmd_{thruster}', 'std_msgs/Float64', GazeboBridge.ros2gz))
-        
+
         sl.create_gz_bridge(bridges)
-                        
-        # ground truth to tf if requested
-        if sl.arg('ground_truth'):
-            sl.node('pose_to_tf',parameters={'child_frame': ns + '/base_link'})
-        else:
-            # otherwise publish ground truth as another link to get, well, ground truth
-            sl.node('pose_to_tf',parameters={'child_frame': ns+'/base_link_gt'})
 
         if sl.arg('sliders'):
             sl.node('slider_publisher', arguments=[sl.find('bluerov2_description', 'manual.yaml')])
