@@ -39,13 +39,10 @@ def launch_setup():
         
         # ground truth if requested
         if sl.arg('ground_truth'):
-            odom_link = ns + '/odom'
             bridges.append(GazeboBridge(f'/model/{ns}/odometry',
                                      'odom', 'nav_msgs/Odometry', GazeboBridge.gz2ros,
                                      'gz.msgs.Odometry'))
             sl.node('pose_to_tf',parameters={'child_frame': ns + '/base_link'})
-            sl.node('tf2_ros', 'static_transform_publisher',
-                    arguments = f'--frame-id world --child-frame-id {odom_link}')
         else:
             # otherwise publish ground truth as another link to get, well, ground truth
             sl.node('pose_to_tf',parameters={'child_frame': ns+'/base_link_gt'})
