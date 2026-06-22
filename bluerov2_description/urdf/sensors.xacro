@@ -161,7 +161,7 @@
 <joint name="sonar" type="fixed">
     <parent link="${ns}/base_link"/>
     <child link="${ns}/sonar"/>
-    <origin xyz="0.135 0.108 0.118"/>
+    <origin xyz="0.135 -0.108 0.118"/>
 </joint>
 
 <gazebo reference="${ns}/sonar">
