@@ -97,11 +97,16 @@
     </joint>
 </xacro:macro>
 
+
 <xacro:imu name="mpu">
     <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
 </xacro:imu>
 
-<xacro:imu name="lsm">
+<xacro:imu name="mpu">
+    <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
+</xacro:imu>
+
+<xacro:imu name="imu">
     <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
 </xacro:imu>
 
