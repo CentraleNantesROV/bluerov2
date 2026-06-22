@@ -40,6 +40,59 @@ and then spawn the robot with a GUI to control the thrusters:
 ros2 launch bluerov2_description upload_bluerov2_launch.py sliders:=true
 ```
 
+## Using with Docker
+
+This repository provides a Docker setup to simplify installation and ensure a
+reproducible ROS 2 + Gazebo environment.
+
+---
+
+### Requirements (Docker)
+
+- Linux host
+- Docker Engine ([How to Install](https://docs.docker.com/engine/install/), it is recommended to use the option "Install using the APT repository")
+- Optional: NVIDIA GPU with NVIDIA Container Toolkit (for GPU acceleration)
+
+---
+
+### Build the Docker image
+
+From the root of the repository, build the Docker image locally:
+
+```bash
+./build_docker.sh
+```
+
+This step needs to be executed once, or whenever the Dockerfile is modified.
+
+---
+
+### Run the container
+
+Run without GPU support:
+
+```bash
+./run_docker.sh
+```
+
+Run with GPU support (recommended for Gazebo):
+
+```bash
+./run_docker.sh --gpu
+```
+
+The container provides access to:
+- Gazebo GUI (X11)
+- USB devices (e.g. joystick, serial interfaces)
+- ROS 2 communication with nodes running outside the container
+
+
+### ROS 2 communication outside Docker
+
+The container uses host networking, allowing ROS 2 nodes running on the host
+(or other machines on the same network) to communicate directly with the
+simulation inside Docker.
+
 ## Input / output
 
 Gazebo will:
