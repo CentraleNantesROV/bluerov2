@@ -2,7 +2,6 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <xacro:property name="x_camera" value="0.02"/>
-<xacro:property name="PI" value="3.1415927"/>
 
 <xacro:macro name="imu" params="name *origin">
     <link name="${ns}/${name}"/>
@@ -99,15 +98,15 @@
 
 
 <xacro:imu name="mpu">
-    <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
+    <origin xyz="0.1 0 0" rpy="0 0 ${-pi/2}"/>
 </xacro:imu>
 
-<xacro:imu name="mpu">
-    <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
+<xacro:imu name="lsm">
+    <origin xyz="0.1 0 0" rpy="0 0 ${-pi/2}"/>
 </xacro:imu>
 
 <xacro:imu name="imu">
-    <origin xyz="0.1 0 0" rpy="0 0 ${-PI/2}"/>
+    <origin xyz="0.058 -0.021 0.018" rpy="${pi/2} 0 0"/>
 </xacro:imu>
 
   
@@ -135,7 +134,7 @@
     <child link="${ns}/camera"/>
     <origin xyz="${x_camera + .15} 0 0" rpy="0 0 0"/>
     <axis xyz="0 1 0" />
-    <limit effort="100" velocity="5.0" lower="${-PI/3}" upper="${PI/3}"/>
+    <limit effort="100" velocity="5.0" lower="${-pi/3}" upper="${pi/3}"/>
     <dynamics damping="0.8"/>
 </joint>
 
@@ -144,7 +143,7 @@
 <joint name="camera_optical" type="fixed">
     <parent link="${ns}/camera"/>
     <child link="${ns}/camera_optical"/>
-    <origin rpy="${-PI/2} 0 ${-PI/2}"/>
+    <origin rpy="${-pi/2} 0 ${-pi/2}"/>
 </joint>
 
 <link name="${ns}/sonar">
