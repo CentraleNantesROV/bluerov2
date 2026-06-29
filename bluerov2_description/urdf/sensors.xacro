@@ -97,13 +97,13 @@
 </xacro:macro>
 
 
-<xacro:imu name="mpu">
+<!--<xacro:imu name="mpu">
     <origin xyz="0.1 0 0" rpy="0 0 ${-pi/2}"/>
 </xacro:imu>
 
 <xacro:imu name="lsm">
     <origin xyz="0.1 0 0" rpy="0 0 ${-pi/2}"/>
-</xacro:imu>
+</xacro:imu>-->
 
 <xacro:imu name="imu">
     <origin xyz="0.058 -0.021 0.018" rpy="${pi/2} 0 0"/>
