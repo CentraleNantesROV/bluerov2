@@ -58,8 +58,8 @@
 <!--    <xacro:if value="$(arg simulation)"> -->
     <gazebo>
         <plugin
-            filename="ignition-gazebo-thruster-system"
-            name="ignition::gazebo::systems::Thruster">
+            filename="gz-sim-thruster-system"
+            name="gz::sim::systems::Thruster">
             <namespace>${ns}</namespace>
             <joint_name>thruster${thruster_id}</joint_name>
             <topic>thruster${thruster_id}/cmd</topic>
@@ -78,19 +78,19 @@
   <!-- all 6 thrusters -->
     
   <xacro:thruster thruster_id="1">
-    <origin xyz="0.1355 -0.1 -0.0725" rpy="0 0 0.7853981634"/>
+    <origin xyz="0.1355 -0.1 -0.0725" rpy="0 0 -2.3561944902"/>
   </xacro:thruster>
   
   <xacro:thruster thruster_id="2">
-    <origin xyz="0.1355 0.1 -0.0725" rpy="0 0 -0.7853981634"/>
+    <origin xyz="0.1355 0.1 -0.0725" rpy="0 0 2.3561944902"/>
   </xacro:thruster>
   
   <xacro:thruster thruster_id="3">
-    <origin xyz="-0.1475 -0.1 -0.0725" rpy="0 0 2.3561944902"/>
+    <origin xyz="-0.1475 -0.1 -0.0725" rpy="0 0 -0.7853981634"/>
   </xacro:thruster>
   
   <xacro:thruster thruster_id="4">
-    <origin xyz="-0.1475 0.1 -0.0725" rpy="0 0 -2.3561944902"/>
+    <origin xyz="-0.1475 0.1 -0.0725" rpy="0 0 0.7853981634"/>
   </xacro:thruster>
 
   <xacro:thruster thruster_id="5">

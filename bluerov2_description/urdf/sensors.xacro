@@ -106,7 +106,7 @@
 </xacro:imu>-->
 
 <xacro:imu name="imu">
-    <origin xyz="0.058 -0.021 0.018" rpy="${pi/2} 0 0"/>
+    <origin xyz="0.058 -0.021 0.018" rpy="0 0 0"/> <!--${pi/2}-->
 </xacro:imu>
 
   
@@ -200,7 +200,7 @@
 
 
 <gazebo>
-    <plugin filename="ignition-gazebo-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
         <joint_name>tilt</joint_name>
         <p_gain>10.</p_gain>
         <i_gain>0.2</i_gain>
